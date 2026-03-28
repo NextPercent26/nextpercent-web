@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NextPercent – Shops die mehr verkaufen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Serif:ital,wght@0,400;1,400;1,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --vibrant:#2CEF92; --green-np:#3FAA77; --deep:#123122; --dark:#141916;
+  --light-g:#DDEDDD; --grey:#EDEDED;
+  --s0:#123122; --s1:#1a3d28; --s2:#1f4a2f; --s3:#3FAA77; --s4:#2a5c3a;
+  --border:rgba(44,239,146,.15); --border2:rgba(255,255,255,.1);
+  --text:#fff; --text2:rgba(255,255,255,.75); --muted:rgba(255,255,255,.48);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--s0);color:var(--text);font-family:'Poppins',sans-serif;font-size:16px;line-height:1.6;overflow-x:hidden}
+
+/* ANNOUNCE */
+.announce{background:var(--deep);border-bottom:1px solid var(--border);overflow:hidden;padding:9px 0;white-space:nowrap;position:relative;z-index:200;}
+.a-track{display:inline-flex;animation:scroll 32s linear infinite;}
+.a-item{display:inline-flex;align-items:center;gap:6px;padding:0 36px;font-size:11px;color:var(--vibrant);font-weight:600;letter-spacing:.1em;text-transform:uppercase;}
+.a-item::before{content:'✦';font-size:8px;opacity:.5}
+@keyframes scroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:rgba(18,49,34,.96);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);padding:0 6%;display:flex;align-items:center;justify-content:space-between;height:60px;}
+.nav-logo{font-family:'Poppins',sans-serif;font-weight:600;font-size:18px;color:#fff;text-decoration:none;letter-spacing:-0.01em;}
+.nav-logo span{color:var(--vibrant)}
+.nav-links{display:flex;gap:24px;list-style:none}
+.nav-links a{color:var(--muted);text-decoration:none;font-size:14px;font-weight:500;transition:color .2s}
+.nav-links a:hover{color:#fff}
+.btn-cta{background:var(--vibrant);color:#0a1f0e;font-weight:600;font-size:13px;padding:10px 20px;border-radius:6px;text-decoration:none;border:none;cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px;white-space:nowrap;font-family:'Poppins',sans-serif;}
+.btn-cta:hover{background:#3dffa0;box-shadow:0 6px 24px rgba(44,239,146,.3);transform:translateY(-1px)}
+.btn-ghost{background:transparent;color:var(--text2);font-weight:500;font-size:14px;padding:11px 22px;border-radius:6px;text-decoration:none;border:1px solid var(--border2);cursor:pointer;transition:all .2s;display:inline-flex;align-items:center;gap:6px;font-family:'Poppins',sans-serif;}
+.btn-ghost:hover{border-color:rgba(255,255,255,.25);color:#fff}
+
+/* HERO */
+.hero{position:relative;min-height:calc(100vh - 96px);display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;padding:80px 6% 60px;}
+.hero-img-wrap{position:absolute;inset:0;z-index:0;}
+.hero-img-wrap img{width:100%;height:100%;object-fit:cover;object-position:center;display:block;}
+.hero-img-wrap::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(12,30,18,.4) 0%,rgba(12,30,18,.55) 40%,rgba(12,30,18,.8) 75%,rgba(12,30,18,.96) 100%);}
+.hero-content{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;}
+.hero-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(44,239,146,.12);border:1px solid rgba(44,239,146,.22);color:var(--vibrant);font-size:11px;font-weight:600;padding:6px 14px;border-radius:100px;margin-bottom:28px;letter-spacing:.08em;text-transform:uppercase;animation:fu .5s ease both;}
+.hero h1{font-family:'Poppins',sans-serif;font-size:clamp(42px,6vw,80px);font-weight:600;line-height:1.05;letter-spacing:-0.02em;margin-bottom:6px;animation:fu .5s ease .08s both;}
+.hero-em{font-family:'Noto Serif',serif;font-style:italic;font-weight:400;color:var(--vibrant);display:block;font-size:clamp(38px,5.5vw,74px);line-height:1.1;margin-bottom:28px;animation:fu .5s ease .13s both;}
+.hero p{max-width:520px;color:var(--text2);font-size:16px;font-weight:400;margin-bottom:36px;animation:fu .5s ease .18s both;line-height:1.75;}
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;animation:fu .5s ease .23s both;margin-bottom:10px;}
+.hero-hint{font-size:12px;color:var(--muted);animation:fu .5s ease .28s both;margin-bottom:52px;}
+.trust-row{display:flex;gap:22px;justify-content:center;flex-wrap:wrap;padding-top:26px;border-top:1px solid rgba(44,239,146,.15);animation:fu .5s ease .33s both;}
+.trust-item{display:flex;align-items:center;gap:5px;font-size:12px;font-weight:500;color:var(--muted);}
+.trust-item .g{color:var(--vibrant);font-size:10px}
+
+/* VIDEO – Green NP bg */
+.video-section{background:var(--s3);padding:72px 6%;border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1);}
+.video-inner{max-width:820px;margin:0 auto;}
+.video-label-row{text-align:center;margin-bottom:28px;}
+.video-label-row .slabel-d{font-size:11px;font-weight:700;color:rgba(0,0,0,.4);text-transform:uppercase;letter-spacing:.12em;margin-bottom:8px;display:block;}
+.video-label-row h2{font-size:clamp(22px,3vw,34px);font-weight:600;color:#0a1f0e;letter-spacing:-0.01em;}
+.video-label-row h2 em{font-family:'Noto Serif',serif;font-style:italic;font-weight:400;color:var(--deep);}
+.video-wrap{background:rgba(0,0,0,.2);border:1px solid rgba(0,0,0,.15);border-radius:16px;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.25);}
+.vbar{background:rgba(0,0,0,.2);padding:10px 16px;display:flex;align-items:center;gap:6px;border-bottom:1px solid rgba(0,0,0,.1);}
+.vd{width:10px;height:10px;border-radius:50%}.vd.r{background:#ff5f57}.vd.y{background:#febc2e}.vd.g{background:#28c840}
+.vurl{flex:1;margin:0 10px;background:rgba(0,0,0,.15);border-radius:4px;padding:4px 10px;font-size:11px;color:rgba(0,0,0,.4);text-align:center;}
+.vplay{aspect-ratio:16/9;background:linear-gradient(135deg,#0d1f0f,#0a120b);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;cursor:pointer;position:relative;overflow:hidden;}
+.vplay::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(18,49,34,.9),transparent);}
+.pbtn{width:64px;height:64px;background:var(--vibrant);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:20px;color:#0a1f0e;transition:all .3s;position:relative;z-index:1;box-shadow:0 0 40px rgba(44,239,146,.3);}
+.pbtn:hover{transform:scale(1.1);box-shadow:0 0 60px rgba(44,239,146,.5);}
+.vlabel{font-size:13px;color:var(--muted);position:relative;z-index:1}
+.vcap{padding:16px 22px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1px solid rgba(0,0,0,.1);background:rgba(0,0,0,.15);}
+.vcap span{font-size:13px;color:rgba(0,0,0,.5)}.vcap strong{color:rgba(0,0,0,.7)}
+.btn-dark{background:#0f2819;color:var(--vibrant);font-weight:600;font-size:12px;padding:8px 14px;border-radius:6px;text-decoration:none;display:inline-flex;align-items:center;gap:5px;font-family:'Poppins',sans-serif;transition:all .2s;}
+.btn-dark:hover{background:var(--deep)}
+
+/* LOGO TICKER */
+.logo-ticker{background:var(--s0);overflow:hidden;padding:30px 0;border-bottom:1px solid var(--border);}
+.logo-track{display:inline-flex;animation:scroll 22s linear infinite;}
+.logo-item{padding:0 40px;font-size:11px;font-weight:600;color:rgba(44,239,146,.28);text-transform:uppercase;letter-spacing:.12em;white-space:nowrap;}
+
+/* STATEMENT – Light Green */
+.statement{background:var(--light-g);border-top:1px solid rgba(18,49,34,.15);border-bottom:1px solid rgba(18,49,34,.15);text-align:center;padding:72px 6%;}
+.statement p{font-family:'Poppins',sans-serif;font-size:clamp(20px,3.5vw,38px);font-weight:600;max-width:820px;margin:0 auto;line-height:1.3;color:var(--deep);letter-spacing:-0.01em;}
+.statement p em{font-family:'Noto Serif',serif;font-style:italic;font-weight:400;color:var(--green-np);}
+
+/* GENERIC */
+section{padding:88px 6%}
+.container{max-width:1140px;margin:0 auto}
+.slabel{font-size:11px;font-weight:700;color:var(--vibrant);text-transform:uppercase;letter-spacing:.12em;margin-bottom:12px;display:block;}
+h2{font-family:'Poppins',sans-serif;font-size:clamp(28px,3.8vw,48px);font-weight:600;line-height:1.1;letter-spacing:-0.01em;margin-bottom:14px;}
+h2 em{font-family:'Noto Serif',serif;font-style:italic;font-weight:400;color:var(--vibrant);}
+.ssub{color:var(--text2);font-size:16px;font-weight:400;max-width:500px;margin-bottom:48px;line-height:1.75;}
+
+/* SEGMENT – deep s1 */
+.seg-section{background:var(--s1)}
+.seg-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px;}
+.seg-card{background:rgba(0,0,0,.2);border:1px solid rgba(44,239,146,.12);border-radius:14px;padding:36px;transition:all .3s;position:relative;overflow:hidden;}
+.seg-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--vibrant),transparent);opacity:0;transition:.3s}
+.seg-card:hover{border-color:rgba(44,239,146,.25);transform:translateY(-3px)}
+.seg-card:hover::before{opacity:1}
+.seg-card h3{font-size:18px;font-weight:600;margin-bottom:10px;letter-spacing:-0.01em}
+.seg-card p{color:var(--text2);font-size:15px;margin-bottom:18px;line-height:1.75}
+.seg-card a{color:var(--vibrant);font-size:14px;font-weight:600;text-decoration:none}
+
+/* QUICK FIX – Green NP */
+.qf-section{background:var(--s3)}
+.qf-h{color:#0a1f0e !important}
+.qf-h em{font-family:'Noto Serif',serif;font-style:italic;font-weight:400;color:var(--deep) !important}
+.qf-sub{color:rgba(0,0,0,.5) !important}
+.qf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px;}
+.qf-card{background:rgba(0,0,0,.15);border:1px solid rgba(0,0,0,.1);border-radius:14px;padding:28px;}
+.qf-tag{display:inline-block;background:rgba(0,0,0,.1);border:1px solid rgba(0,0,0,.08);border-radius:100px;padding:3px 10px;font-size:10px;font-weight:700;color:rgba(0,0,0,.35);text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;}
+.qf-card h3{font-size:15px;font-weight:600;margin-bottom:8px;color:rgba(0,0,0,.82);letter-spacing:-0.01em}
+.qf-card p{color:rgba(0,0,0,.52);font-size:14px;line-height:1.75}
+.qf-bottom{background:rgba(0,0,0,.1);border:1px solid rgba(0,0,0,.08);border-radius:10px;padding:18px 24px;text-align:center;font-size:15px;color:rgba(0,0,0,.65);font-weight:500}
+.qf-bottom strong{color:var(--deep)}
+
+/* BENEFITS – s2 */
+.benefit-section{background:var(--s2)}
+.benefit-list{display:flex;flex-direction:column;gap:14px}
+.benefit-card{background:rgba(0,0,0,.2);border:1px solid rgba(44,239,146,.12);border-radius:16px;padding:44px 52px;display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:center;transition:border-color .3s}
+.benefit-card:hover{border-color:rgba(44,239,146,.2)}
+.benefit-card.rev{direction:rtl}
+.benefit-card.rev > *{direction:ltr}
+.bt h3{font-size:21px;font-weight:600;margin-bottom:10px;letter-spacing:-0.01em}
+.bt p{color:var(--text2);font-size:15px;margin-bottom:16px;line-height:1.8;font-weight:400}
+.buls{list-style:none;display:flex;flex-direction:column;gap:7px}
+.buls li{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--text2)}
+.buls li::before{content:'→';color:var(--vibrant);font-weight:600;flex-shrink:0}
+.bvis{background:rgba(0,0,0,.25);border:1px solid rgba(44,239,146,.1);border-radius:12px;height:200px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.bvis-bg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(18,49,34,.8),transparent)}
+.cbars{display:flex;align-items:flex-end;gap:7px;height:110px;position:relative;z-index:1}
+.bar{width:22px;border-radius:3px 3px 0 0}
+.b1{background:rgba(44,239,146,.1)}.b2{background:rgba(44,239,146,.25)}.b3{background:rgba(44,239,146,.45)}.b4{background:rgba(44,239,146,.65)}.b5{background:var(--vibrant)}
+
+/* STATS – Light Green */
+.stats-section{background:var(--light-g);border-top:1px solid rgba(18,49,34,.12);border-bottom:1px solid rgba(18,49,34,.12)}
+.stats-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(18,49,34,.12);border:1px solid rgba(18,49,34,.12);border-radius:14px;overflow:hidden;margin-bottom:60px}
+.stat-item{background:rgba(255,255,255,.5);padding:30px 22px;text-align:center}
+.stat-num{font-family:'Poppins',sans-serif;font-size:40px;font-weight:600;color:var(--green-np);display:block;line-height:1;letter-spacing:-0.02em}
+.stat-label{font-size:13px;color:rgba(18,49,34,.5);margin-top:4px}
+
+/* CASE STUDIES – s0 */
+.cases-section{background:var(--s0)}
+.case-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:24px}
+.case-card{background:var(--s1);border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:all .3s}
+.case-card:hover{transform:translateY(-5px);border-color:rgba(44,239,146,.22);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.case-img{height:180px;display:flex;align-items:center;justify-content:center;font-family:'Poppins',sans-serif;font-size:17px;font-weight:600;color:rgba(255,255,255,.12);text-align:center;padding:20px;position:relative;overflow:hidden}
+.case-img::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 60% at 50% 50%,rgba(44,239,146,.04),transparent)}
+.ci-whisky{background:linear-gradient(135deg,#1f1000,#2a1800)}.ci-suvene{background:linear-gradient(135deg,#001f10,#00251a)}.ci-kolure{background:linear-gradient(135deg,#00101f,#001525)}.ci-pfeff{background:linear-gradient(135deg,#141000,#1f1800)}.ci-janina{background:linear-gradient(135deg,#1a0018,#200020)}.ci-pfannen{background:linear-gradient(135deg,#200a00,#2a1200)}
+.case-body{padding:20px}
+.case-tags{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:9px}
+.tag{font-size:10px;font-weight:600;color:var(--green-np);background:rgba(63,170,119,.1);border:1px solid rgba(63,170,119,.18);padding:2px 8px;border-radius:100px}
+.case-body h3{font-size:15px;font-weight:600;margin-bottom:5px;letter-spacing:-0.01em}
+.case-body p{color:var(--muted);font-size:12px;margin-bottom:12px;line-height:1.6}
+.case-metrics{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.metric .val{color:var(--vibrant);font-weight:600;font-size:12px}.metric .key{color:var(--muted);font-size:10px;display:block}
+.case-link{font-size:12px;color:var(--vibrant);text-decoration:none;font-weight:600}
+.case-link:hover{text-decoration:underline}
+
+/* PROCESS – Green NP */
+.proc-section{background:var(--s3);border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1)}
+.proc-h{color:#0a1f0e !important}
+.proc-h em{font-family:'Noto Serif',serif;font-style:italic;font-weight:400;color:var(--deep) !important}
+.proc-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.proc-step{background:rgba(0,0,0,.12);border:1px solid rgba(0,0,0,.08);border-radius:14px;padding:26px 20px;transition:all .3s}
+.proc-step:hover{background:rgba(0,0,0,.2)}
+.step-n{font-family:'Poppins',sans-serif;font-size:48px;font-weight:600;color:rgba(0,0,0,.1);line-height:1;margin-bottom:12px;letter-spacing:-0.02em}
+.proc-step h3{font-size:15px;font-weight:600;margin-bottom:6px;letter-spacing:-0.01em;color:#0a1f0e}
+.proc-step p{color:rgba(0,0,0,.5);font-size:13px;line-height:1.75}
+
+/* FEATURES – s2 */
+.feat-section{background:var(--s2)}
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.feat{background:rgba(0,0,0,.2);border:1px solid var(--border);border-radius:12px;padding:24px;transition:all .3s}
+.feat:hover{border-color:rgba(44,239,146,.22);background:rgba(0,0,0,.28)}
+.feat-icon{font-size:18px;color:var(--vibrant);margin-bottom:9px}
+.feat h3{font-size:14px;font-weight:600;margin-bottom:5px;letter-spacing:-0.01em}
+.feat p{color:var(--text2);font-size:13px;line-height:1.7;font-weight:400}
+
+/* TESTIMONIALS – Light Green */
+.testi-section{background:var(--light-g);border-top:1px solid rgba(18,49,34,.12)}
+.t-grid{columns:3;gap:12px}
+.t-card{background:rgba(255,255,255,.6);border:1px solid rgba(18,49,34,.1);border-radius:12px;padding:22px;margin-bottom:12px;break-inside:avoid;transition:all .3s}
+.t-card:hover{border-color:rgba(18,49,34,.2)}
+.t-stars{color:#f59e0b;font-size:12px;margin-bottom:8px}
+.t-text{color:rgba(12,30,18,.7);font-size:14px;line-height:1.8;margin-bottom:12px;font-weight:400}
+.t-author{display:flex;align-items:center;gap:8px}
+.t-av{width:32px;height:32px;border-radius:50%;background:var(--deep);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--vibrant);flex-shrink:0}
+.t-name{font-size:13px;font-weight:600;color:var(--deep)}.t-role{font-size:11px;color:rgba(12,30,18,.5)}
+
+/* GUARANTEE – s0 */
+.guar-section{background:var(--s0)}
+.guar-wrap{background:var(--s1);border:1px solid rgba(44,239,146,.18);border-radius:20px;padding:56px 60px;display:grid;grid-template-columns:1fr auto;gap:56px;align-items:center;position:relative;overflow:hidden}
+.guar-wrap::before{content:'';position:absolute;top:-80px;right:-80px;width:320px;height:320px;border-radius:50%;background:radial-gradient(circle,rgba(44,239,146,.06),transparent)}
+.guar-badge{text-align:center;background:rgba(0,0,0,.25);border:1px solid rgba(44,239,146,.2);border-radius:14px;padding:28px 36px;min-width:190px;position:relative;z-index:1}
+.guar-num{font-family:'Poppins',sans-serif;font-size:52px;font-weight:600;color:var(--vibrant);display:block;line-height:1;letter-spacing:-0.02em}
+.guar-sub{font-size:12px;color:var(--muted);margin-top:4px}
+.chips{display:flex;gap:7px;flex-wrap:wrap;margin-top:18px}
+.chip{font-size:10px;font-weight:600;color:rgba(44,239,146,.7);background:rgba(44,239,146,.08);border:1px solid rgba(44,239,146,.15);padding:4px 9px;border-radius:5px;text-transform:uppercase;letter-spacing:.06em}
+
+/* FAQ – Green NP */
+.faq-section{background:var(--s3);border-top:1px solid rgba(255,255,255,.1)}
+.faq-list{max-width:700px;margin:0 auto}
+.faq-item{border-bottom:1px solid rgba(0,0,0,.1)}
+.faq-q{padding:20px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:15px;font-weight:600;color:#0a1f0e;transition:color .2s;gap:14px;letter-spacing:-0.01em}
+.faq-q:hover{color:var(--deep)}
+.faq-icon{color:var(--deep);font-size:16px;transition:transform .3s;flex-shrink:0}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .4s ease,padding .3s;color:rgba(0,0,0,.55);font-size:14px;line-height:1.8;font-weight:400}
+.faq-item.open .faq-a{max-height:220px;padding-bottom:16px}
+.faq-item.open .faq-icon{transform:rotate(45deg)}
+
+/* FINAL CTA – s0 */
+.fcta-section{background:var(--s0);border-top:1px solid var(--border)}
+.fcta-inner{background:var(--s1);border:1px solid rgba(44,239,146,.14);border-radius:20px;padding:68px;display:grid;grid-template-columns:1fr auto;gap:56px;align-items:center;position:relative;overflow:hidden}
+.fcta-inner::after{content:'';position:absolute;bottom:-100px;right:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,rgba(44,239,146,.04),transparent)}
+.fcta-badges{background:rgba(0,0,0,.2);border:1px solid var(--border);border-radius:14px;padding:26px;min-width:230px;position:relative;z-index:1}
+.fcb{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--text2);padding:6px 0;border-bottom:1px solid var(--border)}
+.fcb:last-child{border-bottom:none}
+.fcb-d{width:5px;height:5px;border-radius:50%;background:var(--vibrant);flex-shrink:0}
+
+/* FOOTER */
+footer{background:var(--deep);border-top:1px solid var(--border);padding:52px 6% 26px}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:40px}
+.flogo{font-family:'Poppins',sans-serif;font-weight:600;font-size:18px;margin-bottom:9px;letter-spacing:-0.01em}
+.flogo span{color:var(--vibrant)}
+.fdesc{color:var(--muted);font-size:14px;line-height:1.75;margin-bottom:16px;font-weight:400}
+.fcol h4{font-size:11px;font-weight:600;color:rgba(255,255,255,.3);text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+.fcol ul{list-style:none;display:flex;flex-direction:column;gap:8px}
+.fcol ul a{color:var(--muted);font-size:14px;text-decoration:none;transition:color .2s}
+.fcol ul a:hover{color:var(--vibrant)}
+.fbot{border-top:1px solid var(--border);padding-top:18px;display:flex;justify-content:space-between;align-items:center;font-size:12px;color:rgba(255,255,255,.18);flex-wrap:wrap;gap:8px}
+.fchips{display:flex;gap:6px;flex-wrap:wrap}
+.fchip{font-size:10px;font-weight:600;color:rgba(255,255,255,.22);background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.05em}
+
+/* ANIMATIONS */
+@keyframes fu{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+.rev{opacity:0;transform:translateY(26px);transition:all .65s cubic-bezier(.16,1,.3,1)}
+.rev.vis{opacity:1;transform:translateY(0)}
+hr{border:none;border-top:1px solid rgba(44,239,146,.1)}
+
+@media(max-width:768px){
+  nav .nav-links{display:none}
+  .seg-grid,.qf-grid,.case-grid,.proc-grid,.feat-grid{grid-template-columns:1fr}
+  .benefit-card{grid-template-columns:1fr;padding:28px}
+  .benefit-card.rev{direction:ltr}
+  .stats-grid{grid-template-columns:repeat(2,1fr)}
+  .t-grid{columns:1}
+  .guar-wrap{grid-template-columns:1fr;padding:32px}
+  .fcta-inner{grid-template-columns:1fr;padding:32px}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="announce">
+  <div class="a-track">
+    <span class="a-item">German Web Award Winner</span><span class="a-item">German Design Award 2026</span><span class="a-item">Shopify Partner</span><span class="a-item">Klaviyo Partner</span><span class="a-item">Sortlist Trusted Partner</span><span class="a-item">Google 5,0 ★★★★★</span><span class="a-item">Trustpilot 4,9 ★★★★★</span><span class="a-item">150+ Projekte</span>
+    <span class="a-item">German Web Award Winner</span><span class="a-item">German Design Award 2026</span><span class="a-item">Shopify Partner</span><span class="a-item">Klaviyo Partner</span><span class="a-item">Sortlist Trusted Partner</span><span class="a-item">Google 5,0 ★★★★★</span><span class="a-item">Trustpilot 4,9 ★★★★★</span><span class="a-item">150+ Projekte</span>
+  </div>
+</div>
+
+<nav>
+  <a href="#" class="nav-logo">Next<span>Percent</span></a>
+  <ul class="nav-links">
+    <li><a href="#case-studies">Case Studies</a></li>
+    <li><a href="#prozess">Prozess</a></li>
+    <li><a href="#faq">FAQ</a></li>
+    <li><a href="#ueber-uns">Über uns</a></li>
+  </ul>
+  <a href="#termin" class="btn-cta">Erstgespräch buchen →</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-img-wrap">
+    <img src="http://fiholkfz.abovedesign.de/wp-content/uploads/2026/03/Hero-1.png" alt="NextPercent Hero">
+  </div>
+  <div class="hero-content">
+    <div class="hero-badge">✦ E-Commerce Branding & Conversion-Optimierung</div>
+    <h1>Shops die mehr verkaufen.</h1>
+    <span class="hero-em">Und wirken wie Marktführer.</span>
+    <p>Wir bauen und optimieren Shopify-Stores für Brands, die sechs- bis achtstellig skalieren wollen – mit Custom Design, Funnel-Optimierung und Positioning, das wirklich funktioniert.</p>
+    <div class="hero-btns">
+      <a href="#termin" class="btn-cta">Erstgespräch buchen →</a>
+      <a href="#case-studies" class="btn-ghost">Unsere Arbeiten ansehen</a>
+    </div>
+    <div class="hero-hint">Kein Pitch. Kein Druck. Einfach ein ehrliches Gespräch.</div>
+    <div class="trust-row">
+      <div class="trust-item"><span class="g">★★★★★</span> Google 5,0</div>
+      <div class="trust-item"><span class="g">★★★★★</span> Trustpilot 4,9</div>
+      <div class="trust-item"><span class="g">✓</span> German Web Award</div>
+      <div class="trust-item"><span class="g">✓</span> German Design Award</div>
+      <div class="trust-item"><span class="g">✓</span> Shopify Partner</div>
+      <div class="trust-item"><span class="g">✓</span> Klaviyo Partner</div>
+    </div>
+  </div>
+</section>
+
+<div class="video-section">
+  <div class="video-inner">
+    <div class="video-label-row">
+      <span class="slabel-d">Wie wir arbeiten</span>
+      <h2>Schau dir an, wie wir <em>arbeiten.</em></h2>
+    </div>
+    <div class="video-wrap rev">
+      <div class="vbar"><div class="vd r"></div><div class="vd y"></div><div class="vd g"></div><div class="vurl">nextpercent.de – Wer wir sind & wie wir arbeiten</div></div>
+      <div class="vplay"><div class="pbtn">▶</div><div class="vlabel">Jason · Founder NextPercent · ~3 Min</div></div>
+      <div class="vcap"><span><strong>Jason</strong>, Founder – in 3 Minuten: wer wir sind, wie wir arbeiten, warum es funktioniert.</span><a href="#termin" class="btn-dark">Erstgespräch buchen →</a></div>
+    </div>
+  </div>
+</div>
+
+<div class="logo-ticker">
+  <div class="logo-track">
+    <span class="logo-item">Shopify</span><span class="logo-item">Klaviyo</span><span class="logo-item">Sortlist</span><span class="logo-item">Google Reviews</span><span class="logo-item">Trustpilot</span><span class="logo-item">German Web Award</span><span class="logo-item">German Design Award</span><span class="logo-item">WhiskyAgents</span><span class="logo-item">Suvene</span><span class="logo-item">Kolure</span><span class="logo-item">Pfeffinger</span><span class="logo-item">Pfannenfreunde</span>
+    <span class="logo-item">Shopify</span><span class="logo-item">Klaviyo</span><span class="logo-item">Sortlist</span><span class="logo-item">Google Reviews</span><span class="logo-item">Trustpilot</span><span class="logo-item">German Web Award</span><span class="logo-item">German Design Award</span><span class="logo-item">WhiskyAgents</span><span class="logo-item">Suvene</span><span class="logo-item">Kolure</span><span class="logo-item">Pfeffinger</span><span class="logo-item">Pfannenfreunde</span>
+  </div>
+</div>
+
+<div class="statement">
+  <p>Gutes Design gibt es an jeder Ecke. Deshalb bauen wir Shops, die nicht nur gut aussehen – sondern <em>wirklich mehr verkaufen.</em></p>
+</div>
+
+<section class="seg-section">
+  <div class="container">
+    <span class="slabel">Wer zu uns kommt</span>
+    <h2>Dein Shop macht Umsatz.<br><em>Aber da ist noch mehr drin.</em></h2>
+    <div class="seg-grid rev">
+      <div class="seg-card"><h3>Deine Conversion Rate ist zu niedrig.</h3><p>Der Traffic läuft, die Werbung läuft – aber irgendwie kauft ein Großteil trotzdem nicht. Die Conversion Rate liegt bei 1 Prozent und du weißt nicht genau warum. Wir finden wo du Kunden verlierst – und beheben es konkret.</p><a href="#termin">Erstgespräch buchen →</a></div>
+      <div class="seg-card"><h3>Dein Brand ist gut – aber dein Shop transportiert es noch nicht.</h3><p>Potenzielle Kunden kommen auf die Seite und springen ab. Nicht weil dein Produkt schlecht ist – sondern weil der Shop noch nicht das Vertrauen ausstrahlt, das deine Brand verdient. Wir ändern das.</p><a href="#termin">Erstgespräch buchen →</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="qf-section">
+  <div class="container">
+    <span class="slabel" style="color:rgba(0,0,0,.4);">Das Problem</span>
+    <h2 class="qf-h">Die meisten probieren das.<br><em>Und fragen sich warum es nicht reicht.</em></h2>
+    <p class="ssub qf-sub">Symptome behandeln bringt nichts, wenn die Ursache bleibt.</p>
+    <div class="qf-grid rev">
+      <div class="qf-card"><div class="qf-tag">Quick Fix</div><h3>„Einfach mehr Ads schalten!"</h3><p>Der Traffic ist schon da. Wenn 98 von 100 Besuchern nicht kaufen, ist mehr Budget in Ads keine Lösung. Das Problem liegt im Shop, nicht im Kanal.</p></div>
+      <div class="qf-card"><div class="qf-tag">Quick Fix</div><h3>„Wir holen einen Freelancer rein."</h3><p>Sieht vielleicht besser aus – aber fühlt sich immer noch generisch an. Weil niemand wirklich gefragt hat, wer dein Kunde ist und was ihn zum Kauf bringt.</p></div>
+      <div class="qf-card"><div class="qf-tag">Quick Fix</div><h3>„Irgendeine Agentur macht das schon."</h3><p>Templates, Copy-Paste, keine echte Strategie. Du bezahlst für Ausführung statt für Denken. Das Ergebnis fühlt sich von der Stange an – weil es das ist.</p></div>
+    </div>
+    <div class="qf-bottom rev">Das echte Problem: <strong>niemand hat wirklich verstanden, wie dein Kunde denkt.</strong> Genau das ändern wir.</div>
+  </div>
+</section>
+
+<section class="benefit-section">
+  <div class="container">
+    <span class="slabel">Was wir machen</span>
+    <h2>So bringen wir deinen Shop<br><em>auf das nächste Level.</em></h2>
+    <p class="ssub">Kein Template. Kein Copy-Paste. Alles aufeinander abgestimmt.</p>
+    <div class="benefit-list">
+      <div class="benefit-card rev">
+        <div class="bt"><h3>Funnel-Analyse & Touchpoint-Optimierung</h3><p>Bevor wir irgendetwas anfassen, analysieren wir wie sich deine Kunden durch den Shop bewegen. Wo kommen sie her, wo springen sie ab.</p><ul class="buls"><li>Heatmaps & Session-Analyse</li><li>Touchpoint-Mapping der Customer Journey</li><li>Priorisierte Aktionsliste mit konkreten Hebeln</li></ul></div>
+        <div class="bvis"><div class="bvis-bg"></div><div style="position:relative;z-index:1;text-align:center;padding:20px;"><div style="font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.1em;margin-bottom:14px;">Customer Journey</div><div style="display:flex;flex-direction:column;gap:5px;width:140px;"><div style="background:rgba(44,239,146,.9);height:9px;border-radius:5px;width:100%"></div><div style="background:rgba(44,239,146,.6);height:9px;border-radius:5px;width:75%"></div><div style="background:rgba(44,239,146,.35);height:9px;border-radius:5px;width:50%"></div><div style="background:rgba(44,239,146,.18);height:9px;border-radius:5px;width:28%"></div></div><div style="font-size:11px;color:var(--muted);margin-top:10px;">Absprünge finden & fixen</div></div></div>
+      </div>
+      <div class="benefit-card rev">
+        <div class="bvis"><div class="bvis-bg"></div><div class="cbars"><div class="bar b1" style="height:32px"></div><div class="bar b2" style="height:46px"></div><div class="bar b3" style="height:58px"></div><div class="bar b3" style="height:70px"></div><div class="bar b4" style="height:88px"></div><div class="bar b5" style="height:110px"></div></div></div>
+        <div class="bt"><h3>Höhere Conversion Rate</h3><p>Wir bauen jeden Schritt so um, dass mehr Besucher zu Käufern werden. UX, Design, Copy, Angebotsstruktur – psychologisch optimiert, alles messbar.</p><ul class="buls"><li>Psychologisch optimierte Seitenstruktur</li><li>A/B-Testing & iterative Verbesserung</li><li>Custom Landing Pages</li></ul></div>
+      </div>
+      <div class="benefit-card rev">
+        <div class="bt"><h3>Höherer Durchschnittsbestellwert</h3><p>Nicht jeder Kauf muss ein Einzelkauf sein. Wir bauen Upsell-Strukturen, Bundle-Angebote und Post-Purchase-Flows die deinen AOV systematisch erhöhen.</p><ul class="buls"><li>Offer-Architektur & Bundling</li><li>Post-Purchase Funnels</li><li>Klaviyo E-Mail-Flows</li></ul></div>
+        <div class="bvis"><div class="bvis-bg"></div><div style="position:relative;z-index:1;text-align:center;"><div style="font-size:11px;color:var(--muted);margin-bottom:6px;">Ø Bestellwert</div><div style="font-family:'Poppins',sans-serif;font-size:48px;font-weight:600;color:var(--vibrant);line-height:1;letter-spacing:-0.02em;">€142</div><div style="font-size:12px;color:var(--green-np);margin-top:6px;">↑ +38% nach Optimierung</div></div></div>
+      </div>
+      <div class="benefit-card rev">
+        <div class="bvis" style="background:linear-gradient(135deg,#0d1f0f,#0a0c0a);"><div style="text-align:center;padding:20px;"><div style="font-family:'Poppins',sans-serif;font-size:16px;font-weight:500;color:rgba(255,255,255,.8);">Your</div><div style="font-family:'Noto Serif',serif;font-size:22px;font-weight:400;font-style:italic;color:var(--vibrant);line-height:1.2;">next percent</div><div style="font-family:'Poppins',sans-serif;font-size:16px;font-weight:500;color:rgba(255,255,255,.8);">starts here</div></div></div>
+        <div class="bt"><h3>Ein Auftritt wie ein Marktführer</h3><p>Apple, Nike – die erkennst du in einer Sekunde. Das ist kein Zufall, das ist Absicht. Wir bauen Brands die sofort Vertrauen schaffen, bevor jemand eine Zeile gelesen hat.</p><ul class="buls"><li>Custom Branding & CI komplett neu</li><li>Shopify Design ohne Templates</li><li>Positioning & Messaging</li></ul></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stats-section">
+  <div class="container">
+    <span class="slabel" style="color:var(--green-np);">Die Zahlen</span>
+    <h2 style="color:var(--deep);margin-bottom:40px;">Die Ergebnisse<br><span style="font-family:'Noto Serif',serif;font-style:italic;font-weight:400;color:var(--green-np);">sprechen für sich.</span></h2>
+    <div class="stats-grid rev">
+      <div class="stat-item"><span class="stat-num">150+</span><span class="stat-label">Projekte</span></div>
+      <div class="stat-item"><span class="stat-num">0×</span><span class="stat-label">Garantie eingelöst</span></div>
+      <div class="stat-item"><span class="stat-num">2×</span><span class="stat-label">German Award Winner</span></div>
+      <div class="stat-item"><span class="stat-num">4,9★</span><span class="stat-label">Ø Kundenbewertung</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="cases-section" id="case-studies">
+  <div class="container">
+    <span class="slabel">Referenzen</span>
+    <h2>Brands die wir auf das<br><em>nächste Level gebracht haben.</em></h2>
+    <p class="ssub">Echte Projekte. Echte Ergebnisse.</p>
+    <div class="case-grid rev">
+      <div class="case-card"><div class="case-img ci-whisky">WhiskyAgents</div><div class="case-body"><div class="case-tags"><span class="tag">Branding</span><span class="tag">Shopify</span><span class="tag">Positioning</span></div><h3>WhiskyAgents</h3><p>International. Premium. Unverwechselbar.</p><div class="case-metrics"><div class="metric"><span class="val">↑ CR</span><span class="key">Conversion</span></div><div class="metric"><span class="val">↑ AOV</span><span class="key">Bestellwert</span></div><div class="metric"><span class="val">↑ B2B</span><span class="key">Großhandel</span></div></div><a href="#" class="case-link">Case Study →</a></div></div>
+      <div class="case-card"><div class="case-img ci-suvene">Suvene</div><div class="case-body"><div class="case-tags"><span class="tag">Redesign</span><span class="tag">CRO</span></div><h3>Suvene</h3><p>Gutes Produkt, richtiger Auftritt.</p><div class="case-metrics"><div class="metric"><span class="val">↑ CR</span><span class="key">Conversion</span></div><div class="metric"><span class="val">↑ Return</span><span class="key">Stammkunden</span></div></div><a href="#" class="case-link">Case Study →</a></div></div>
+      <div class="case-card"><div class="case-img ci-kolure">Kolure</div><div class="case-body"><div class="case-tags"><span class="tag">Branding</span><span class="tag">Design</span></div><h3>Kolure</h3><p>Eine Brand, die man nicht vergisst.</p><div class="case-metrics"><div class="metric"><span class="val">↑ Brand</span><span class="key">Awareness</span></div><div class="metric"><span class="val">↑ Trust</span><span class="key">Vertrauen</span></div></div><a href="#" class="case-link">Case Study →</a></div></div>
+      <div class="case-card"><div class="case-img ci-pfeff">Pfeffinger</div><div class="case-body"><div class="case-tags"><span class="tag">Shopify</span><span class="tag">CRO</span></div><h3>Pfeffinger</h3><p>Mehr Vertrauen. Mehr Umsatz.</p><div class="case-metrics"><div class="metric"><span class="val">↑ CR</span><span class="key">Conversion</span></div><div class="metric"><span class="val">↑ AOV</span><span class="key">Bestellwert</span></div></div><a href="#" class="case-link">Case Study →</a></div></div>
+      <div class="case-card"><div class="case-img ci-janina">jan&ina Trachten</div><div class="case-body"><div class="case-tags"><span class="tag">Redesign</span><span class="tag">Branding</span></div><h3>jan&ina Trachten</h3><p>Tradition modern gemacht.</p><div class="case-metrics"><div class="metric"><span class="val">↑ Brand</span><span class="key">Positionierung</span></div><div class="metric"><span class="val">↑ CR</span><span class="key">Conversion</span></div></div><a href="#" class="case-link">Case Study →</a></div></div>
+      <div class="case-card"><div class="case-img ci-pfannen">Pfannenfreunde</div><div class="case-body"><div class="case-tags"><span class="tag">Shopify</span><span class="tag">Design</span></div><h3>Pfannenfreunde</h3><p>Premium-Kochgeschirr, das überzeugt.</p><div class="case-metrics"><div class="metric"><span class="val">↑ CR</span><span class="key">Conversion</span></div><div class="metric"><span class="val">↑ Brand</span><span class="key">Awareness</span></div></div><a href="#" class="case-link">Case Study →</a></div></div>
+    </div>
+    <div style="text-align:center"><a href="#" class="btn-ghost">Alle Referenzen ansehen</a></div>
+  </div>
+</section>
+
+<section class="proc-section" id="prozess">
+  <div class="container">
+    <span class="slabel" style="color:rgba(0,0,0,.4)">So läuft es ab</span>
+    <h2 class="proc-h" style="margin-bottom:40px;">In 4 Schritten zum Shop,<br><em>der mehr verkauft.</em></h2>
+    <div class="proc-grid rev">
+      <div class="proc-step"><div class="step-n">01</div><h3>Du meldest dich.</h3><p>Kein langer Fragebogen. Kurz beschreiben wo du stehst – wir melden uns innerhalb von 24h.</p></div>
+      <div class="proc-step"><div class="step-n">02</div><h3>Kostenloses Erstgespräch.</h3><p>Wir schauen uns deinen Shop an und sagen dir ehrlich, was wir sehen. Ohne Pitch, ohne Druck.</p></div>
+      <div class="proc-step"><div class="step-n">03</div><h3>Wir bauen gemeinsam.</h3><p>Analyse, Strategie, Design, Umsetzung – alles aus einer Hand, alles aufeinander abgestimmt.</p></div>
+      <div class="proc-step"><div class="step-n">04</div><h3>Dein Shop verkauft mehr.</h3><p>Bessere Conversion, höherer AOV, eine Brand die im Kopf bleibt. Messbar.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="feat-section">
+  <div class="container">
+    <span class="slabel">Was uns ausmacht</span>
+    <h2 style="margin-bottom:40px;">Warum Brands sich<br><em>für NextPercent entscheiden.</em></h2>
+    <div class="feat-grid rev">
+      <div class="feat"><div class="feat-icon">◈</div><h3>Kein Template. Nie.</h3><p>Jedes Projekt von Grund auf für deine Brand – für deinen Markt, deine Kunden.</p></div>
+      <div class="feat"><div class="feat-icon">◎</div><h3>Strategie vor Design.</h3><p>Wir fassen keinen Pixel an, bevor wir nicht wissen wie dein Kunde denkt.</p></div>
+      <div class="feat"><div class="feat-icon">◉</div><h3>Shopify & Klaviyo Partner.</h3><p>Zertifiziert. Wir kennen die Plattformen von innen.</p></div>
+      <div class="feat"><div class="feat-icon">⬡</div><h3>Alles aus einer Hand.</h3><p>Von der Analyse bis zum Launch. Ein Ansprechpartner, ein Prozess.</p></div>
+      <div class="feat"><div class="feat-icon">◆</div><h3>Messbare Ergebnisse.</h3><p>Wir bauen für Conversion-Rates, AOV und Return Rate – nicht für Awards.</p></div>
+      <div class="feat"><div class="feat-icon">◇</div><h3>Einmalig oder langfristig.</h3><p>Rebranding oder laufende Optimierung – wir passen uns an.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="testi-section">
+  <div class="container">
+    <span class="slabel" style="color:var(--green-np)">Bewertungen</span>
+    <h2 style="color:var(--deep);margin-bottom:40px;">Was unsere<br><span style="font-family:'Noto Serif',serif;font-style:italic;font-weight:400;color:var(--green-np)">Partner sagen.</span></h2>
+    <div class="t-grid rev">
+      <div class="t-card"><div class="t-stars">★★★★★</div><div class="t-text">„Der Shop sieht jetzt endlich so aus wie unsere Brand wirklich ist. Kunden die vorher abgesprungen sind, kaufen jetzt."</div><div class="t-author"><div class="t-av">W</div><div><div class="t-name">WhiskyAgents</div><div class="t-role">E-Commerce · B2B & B2C</div></div></div></div>
+      <div class="t-card"><div class="t-stars">★★★★★</div><div class="t-text">„Die haben nicht einfach designed, sondern wirklich verstanden wer unsere Kunden sind. Das Ergebnis spricht für sich."</div><div class="t-author"><div class="t-av">S</div><div><div class="t-name">Suvene</div><div class="t-role">E-Commerce</div></div></div></div>
+      <div class="t-card"><div class="t-stars">★★★★★</div><div class="t-text">„Endlich eine Agentur die mitdenkt und uns herausfordert. Das Ergebnis ist besser als alles was wir erwartet hatten."</div><div class="t-author"><div class="t-av">K</div><div><div class="t-name">Kolure</div><div class="t-role">E-Commerce · Fashion</div></div></div></div>
+      <div class="t-card"><div class="t-stars">★★★★★</div><div class="t-text">„Unkompliziert, schnell, und das Ergebnis auf Punkt. Würden wir jederzeit wieder machen."</div><div class="t-author"><div class="t-av">P</div><div><div class="t-name">Pfeffinger</div><div class="t-role">E-Commerce</div></div></div></div>
+      <div class="t-card"><div class="t-stars">★★★★★</div><div class="t-text">„Wir sind begeistert. Der Shop fühlt sich an wie wir – nur besser. Unsere Kunden merken das sofort."</div><div class="t-author"><div class="t-av">J</div><div><div class="t-name">jan&ina Trachten</div><div class="t-role">E-Commerce · Fashion</div></div></div></div>
+      <div class="t-card"><div class="t-stars">★★★★★</div><div class="t-text">„Professionell, durchdacht und auf unsere Brand zugeschnitten. Genau das was wir gesucht haben."</div><div class="t-author"><div class="t-av">F</div><div><div class="t-name">Pfannenfreunde</div><div class="t-role">E-Commerce · Küche</div></div></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="guar-section">
+  <div class="container">
+    <div class="guar-wrap rev">
+      <div style="position:relative;z-index:1">
+        <span class="slabel">Unsere Garantie</span>
+        <h2>Wir sind so überzeugt –<br><em>wir nehmen dir das Risiko ab.</em></h2>
+        <p style="color:var(--text2);font-size:15px;margin-top:12px;max-width:460px;line-height:1.8;font-weight:400">Wenn du nach den ersten Design-Entwürfen nicht überzeugt bist, bekommst du deine Anzahlung zurück. Kein Kleingedrucktes. Diese Garantie haben wir in über 150 Projekten noch nie anwenden müssen.</p>
+        <div class="chips"><span class="chip">German Web Award</span><span class="chip">German Design Award</span><span class="chip">Shopify Partner</span><span class="chip">Klaviyo Partner</span></div>
+      </div>
+      <div class="guar-badge"><span class="guar-num">0×</span><span class="guar-sub">Garantie eingelöst</span><div style="margin-top:10px;font-size:11px;color:rgba(255,255,255,.25)">Über 150+ Projekte</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="faq-section" id="faq">
+  <div class="container">
+    <span class="slabel" style="color:rgba(0,0,0,.35);text-align:center;display:block">FAQ</span>
+    <h2 class="proc-h" style="text-align:center;margin-bottom:40px">Häufige <span style="font-family:'Noto Serif',serif;font-style:italic;font-weight:400">Fragen.</span></h2>
+    <div class="faq-list">
+      <div class="faq-item"><div class="faq-q" onclick="tfaq(this)">Was kostet ein Projekt bei NextPercent? <span class="faq-icon">+</span></div><div class="faq-a">Je nach Umfang und Zielsetzung unterschiedlich. Im kostenlosen Erstgespräch schauen wir gemeinsam, was für dich sinnvoll ist und was es kostet.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="tfaq(this)">Einmaliges Projekt oder langfristige Zusammenarbeit? <span class="faq-icon">+</span></div><div class="faq-a">Beides. Manche arbeiten einmalig für ein komplettes Rebranding mit uns, andere sind langfristige Partner für kontinuierliche Optimierung.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="tfaq(this)">Auf welcher Plattform baut ihr? <span class="faq-icon">+</span></div><div class="faq-a">Ausschließlich Shopify. Wir sind zertifizierter Shopify Partner und kennen die Plattform von innen.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="tfaq(this)">Wie lange dauert ein Projekt? <span class="faq-icon">+</span></div><div class="faq-a">Je nach Umfang 4–12 Wochen. Das definieren wir gemeinsam im Erstgespräch – realistisch, nicht optimistisch.</div></div>
+      <div class="faq-item"><div class="faq-q" onclick="tfaq(this)">Was wenn ich nicht zufrieden bin? <span class="faq-icon">+</span></div><div class="faq-a">Wir arbeiten so lange, bis es passt. Und wenn du nach den ersten Entwürfen nicht überzeugt bist, bekommst du deine Anzahlung zurück. Noch nie angewendet.</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="fcta-section" id="termin">
+  <div class="container">
+    <div class="fcta-inner rev">
+      <div style="position:relative;z-index:1">
+        <span class="slabel">Bereit?</span>
+        <h2>Dein nächster Prozent<br><em>fängt hier an.</em></h2>
+        <p style="color:var(--text2);font-size:15px;max-width:440px;margin:14px 0 26px;line-height:1.8;font-weight:400">Kostenloses Erstgespräch. Wir schauen uns deinen Shop an und sagen dir ehrlich, was wir sehen – und was zu tun wäre.</p>
+        <div style="display:flex;gap:12px;flex-wrap:wrap">
+          <a href="#" class="btn-cta">Erstgespräch buchen →</a>
+          <a href="#case-studies" class="btn-ghost">Unsere Arbeiten ansehen</a>
+        </div>
+        <div style="margin-top:12px;font-size:12px;color:var(--muted)">Auch wenn wir danach nicht zusammenarbeiten – du gehst mit einem klaren Bild raus.</div>
+      </div>
+      <div class="fcta-badges">
+        <div class="fcb"><span class="fcb-d"></span>German Web Award Winner</div>
+        <div class="fcb"><span class="fcb-d"></span>German Design Award 2026</div>
+        <div class="fcb"><span class="fcb-d"></span>Shopify Partner</div>
+        <div class="fcb"><span class="fcb-d"></span>Klaviyo Partner</div>
+        <div class="fcb"><span class="fcb-d"></span>Google 5,0 ★★★★★</div>
+        <div class="fcb"><span class="fcb-d"></span>Trustpilot 4,9 ★★★★★</div>
+        <div class="fcb"><span class="fcb-d"></span>0× Garantie eingelöst</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="ueber-uns">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="flogo">Next<span>Percent</span></div>
+        <p class="fdesc">E-Commerce Branding und Conversion-Optimierung für Brands die wirklich wachsen wollen. Shopify Partner · Klaviyo Partner · German Web Award Winner.</p>
+        <div class="chips"><span class="chip">German Web Award</span><span class="chip">Shopify Partner</span><span class="chip">Klaviyo Partner</span></div>
+      </div>
+      <div class="fcol"><h4>Case Studies</h4><ul><li><a href="#">WhiskyAgents</a></li><li><a href="#">Suvene</a></li><li><a href="#">Kolure</a></li><li><a href="#">Pfeffinger</a></li><li><a href="#">jan&ina Trachten</a></li><li><a href="#">Pfannenfreunde</a></li></ul></div>
+      <div class="fcol"><h4>Leistungen</h4><ul><li><a href="#">Branding & Design</a></li><li><a href="#">Conversion-Optimierung</a></li><li><a href="#">Funnel-Analyse</a></li><li><a href="#">Shopify Design</a></li><li><a href="#">Klaviyo E-Mail</a></li></ul></div>
+      <div class="fcol"><h4>Unternehmen</h4><ul><li><a href="#ueber-uns">Über uns</a></li><li><a href="#prozess">Prozess</a></li><li><a href="#faq">FAQ</a></li><li><a href="#termin">Erstgespräch buchen</a></li><li><a href="#">Impressum</a></li></ul></div>
+    </div>
+    <div class="fbot">
+      <span>© 2025 NextPercent. Alle Rechte vorbehalten.</span>
+      <div class="fchips"><span class="fchip">German Web Award</span><span class="fchip">German Design Award</span><span class="fchip">Shopify Partner</span><span class="fchip">Klaviyo Partner</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.rev').forEach(el=>{
+  new IntersectionObserver(e=>{e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('vis')});},{threshold:.08}).observe(el);
+});
+function tfaq(el){
+  const item=el.parentElement,open=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!open)item.classList.add('open');
+}
+</script>
+</body>
+</html>
