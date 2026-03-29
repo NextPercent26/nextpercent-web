@@ -42,7 +42,7 @@ nav{position:sticky;top:0;z-index:100;background:rgba(10,31,16,.96);backdrop-fil
 .btn-secondary:hover{border-color:rgba(255,255,255,.3);color:#fff}
 
 /* HERO */
-.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 8% 100px;overflow:hidden}
+.hero{position:relative;min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:160px 8% 100px;overflow:hidden}
 .hero-bg{position:absolute;inset:0;z-index:0}
 .hero-bg img{width:100%;height:100%;object-fit:cover;object-position:center}
 .hero-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(to bottom,rgba(10,31,16,.3) 0%,rgba(10,31,16,.5) 35%,rgba(10,31,16,.78) 65%,rgba(10,31,16,.97) 100%)}
@@ -68,13 +68,13 @@ nav{position:sticky;top:0;z-index:100;background:rgba(10,31,16,.96);backdrop-fil
 .vbar{background:rgba(0,0,0,.2);padding:12px 18px;display:flex;align-items:center;gap:6px;border-bottom:1px solid rgba(0,0,0,.1)}
 .vd{width:11px;height:11px;border-radius:50%}.vd.r{background:#ff5f57}.vd.y{background:#febc2e}.vd.g{background:#28c840}
 .vurl{flex:1;margin:0 12px;background:rgba(0,0,0,.12);border-radius:5px;padding:5px 12px;font-size:11px;color:rgba(0,0,0,.35);text-align:center}
-.vplay{aspect-ratio:16/9;background:linear-gradient(135deg,#0a1f0e,#061208);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;cursor:pointer;position:relative;overflow:hidden}
+.vplay{aspect-ratio:16/9;background:url('Shooting_Studio_Seven.jpg') center/cover no-repeat;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;cursor:pointer;position:relative;overflow:hidden}
 .vplay::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 50% 60% at 50% 50%,rgba(18,49,34,.9),transparent)}
 .play-btn{width:72px;height:72px;background:var(--v);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:22px;color:#061a0c;position:relative;z-index:1;box-shadow:0 0 50px rgba(44,239,146,.35);transition:all .3s}
 .play-btn:hover{transform:scale(1.1);box-shadow:0 0 70px rgba(44,239,146,.55)}
 .vplay-label{font-size:13px;color:var(--mu);position:relative;z-index:1}
 .vcap{padding:18px 24px;display:flex;align-items:center;justify-content:space-between;gap:16px;border-top:1px solid rgba(0,0,0,.1);background:rgba(0,0,0,.15)}
-.vcap span{font-size:13px;color:rgba(0,0,0,.5)}.vcap strong{color:rgba(0,0,0,.7)}
+.vcap span{font-size:13px;color:rgba(255,255,255,.8)}.vcap strong{color:#fff}
 .btn-dark{background:#061a0c;color:var(--v);font-weight:600;font-size:12px;padding:9px 16px;border-radius:7px;text-decoration:none;font-family:Poppins,sans-serif;transition:all .2s;display:inline-flex;align-items:center;gap:5px}
 .btn-dark:hover{background:var(--deep)}
 
@@ -301,7 +301,7 @@ hr{border:none;border-top:1px solid var(--border)}
       <a href="#cta" class="btn-primary">Erstgespräch buchen →</a>
       <a href="#cases" class="btn-secondary">Unsere Arbeiten ansehen</a>
     </div>
-    <div class="hero-sub">Kein Pitch. Kein Druck. Einfach ein ehrliches Gespräch.</div>
+    <div class="hero-sub"></div>
     <div class="trust-bar">
       <div class="trust-item"><span class="star">★★★★★</span> Google 5,0</div>
       <div class="trust-item"><span class="star">★★★★★</span> Trustpilot 4,9</div>
